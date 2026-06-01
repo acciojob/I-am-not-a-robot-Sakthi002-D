@@ -16,7 +16,7 @@ let randomIndex = Math.floor(Math.random() * images.length);
 
 images.push(images[randomIndex]);
 
-// SHUFFLE
+// SHUFFLE IMAGES
 images.sort(() => Math.random() - 0.5);
 
 let selectedImages = [];
@@ -31,12 +31,12 @@ images.forEach((className) => {
 
   img.addEventListener("click", () => {
 
-    // ONLY 2 SELECTIONS
+    // ALLOW ONLY 2 SELECTIONS
     if (selectedImages.length >= 2) {
       return;
     }
 
-    // SAME IMAGE AGAIN CLICK
+    // PREVENT SAME IMAGE DOUBLE CLICK
     if (selectedElements.includes(img)) {
       return;
     }
@@ -49,7 +49,7 @@ images.forEach((className) => {
 
     showResetButton();
 
-    // SHOW VERIFY BUTTON
+    // SHOW VERIFY BUTTON AFTER 2 CLICKS
     if (selectedImages.length === 2) {
       showVerifyButton();
     }
@@ -61,9 +61,10 @@ images.forEach((className) => {
 });
 
 
-// RESET BUTTON
+// RESET BUTTON FUNCTION
 function showResetButton() {
 
+  // PREVENT MULTIPLE RESET BUTTONS
   if (document.getElementById("reset")) {
     return;
   }
@@ -77,11 +78,17 @@ function showResetButton() {
   resetBtn.addEventListener("click", resetGame);
 
   buttonContainer.appendChild(resetBtn);
+
 }
 
 
-// VERIFY BUTTON
+// VERIFY BUTTON FUNCTION
 function showVerifyButton() {
+
+  // PREVENT MULTIPLE VERIFY BUTTONS
+  if (document.getElementById("verify")) {
+    return;
+  }
 
   const verifyBtn = document.createElement("button");
 
@@ -92,13 +99,16 @@ function showVerifyButton() {
   verifyBtn.addEventListener("click", verifyImages);
 
   buttonContainer.appendChild(verifyBtn);
+
 }
 
 
-// VERIFY FUNCTION
+// VERIFY IMAGES
 function verifyImages() {
 
-  document.getElementById("verify").remove();
+  const verifyBtn = document.getElementById("verify");
+
+  verifyBtn.remove();
 
   if (selectedImages[0] === selectedImages[1]) {
 
@@ -114,7 +124,7 @@ function verifyImages() {
 }
 
 
-// RESET FUNCTION
+// RESET GAME
 function resetGame() {
 
   selectedImages = [];
@@ -124,7 +134,9 @@ function resetGame() {
   para.innerText = "";
 
   document.querySelectorAll("img").forEach((img) => {
+
     img.classList.remove("selected");
+
   });
 
   const resetBtn = document.getElementById("reset");
