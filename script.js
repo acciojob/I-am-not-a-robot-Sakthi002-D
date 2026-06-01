@@ -2,7 +2,6 @@ const imageContainer = document.getElementById("image-container");
 const buttonContainer = document.getElementById("button-container");
 const para = document.getElementById("para");
 
-// IMAGE CLASSES
 let images = [
   "img1",
   "img2",
@@ -11,12 +10,12 @@ let images = [
   "img5"
 ];
 
-// RANDOM DUPLICATE
+// ADD RANDOM DUPLICATE
 let randomIndex = Math.floor(Math.random() * images.length);
 
 images.push(images[randomIndex]);
 
-// SHUFFLE IMAGES
+// SHUFFLE
 images.sort(() => Math.random() - 0.5);
 
 let selectedImages = [];
@@ -31,7 +30,7 @@ images.forEach((className) => {
 
   img.addEventListener("click", () => {
 
-    // ALLOW ONLY 2 SELECTIONS
+    // ONLY 2 SELECTIONS
     if (selectedImages.length >= 2) {
       return;
     }
@@ -49,7 +48,6 @@ images.forEach((className) => {
 
     showResetButton();
 
-    // SHOW VERIFY BUTTON AFTER 2 CLICKS
     if (selectedImages.length === 2) {
       showVerifyButton();
     }
@@ -61,10 +59,9 @@ images.forEach((className) => {
 });
 
 
-// RESET BUTTON FUNCTION
+// RESET BUTTON
 function showResetButton() {
 
-  // PREVENT MULTIPLE RESET BUTTONS
   if (document.getElementById("reset")) {
     return;
   }
@@ -77,15 +74,14 @@ function showResetButton() {
 
   resetBtn.addEventListener("click", resetGame);
 
-  buttonContainer.appendChild(resetBtn);
+  buttonContainer.append(resetBtn);
 
 }
 
 
-// VERIFY BUTTON FUNCTION
+// VERIFY BUTTON
 function showVerifyButton() {
 
-  // PREVENT MULTIPLE VERIFY BUTTONS
   if (document.getElementById("verify")) {
     return;
   }
@@ -98,12 +94,12 @@ function showVerifyButton() {
 
   verifyBtn.addEventListener("click", verifyImages);
 
-  buttonContainer.appendChild(verifyBtn);
+  buttonContainer.append(verifyBtn);
 
 }
 
 
-// VERIFY IMAGES
+// VERIFY FUNCTION
 function verifyImages() {
 
   const verifyBtn = document.getElementById("verify");
@@ -119,12 +115,13 @@ function verifyImages() {
 
     para.innerText =
       "We can't verify you as a human. You selected the non-identical tiles.";
+
   }
 
 }
 
 
-// RESET GAME
+// RESET FUNCTION
 function resetGame() {
 
   selectedImages = [];
